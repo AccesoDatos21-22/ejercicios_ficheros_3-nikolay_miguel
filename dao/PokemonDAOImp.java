@@ -27,6 +27,10 @@ public class PokemonDAOImp implements PokemonDAO {
 		numPokemones = tamano;
 	}
 
+	public PokemonDAOImp() {
+
+	}
+
 	@Override
 	public boolean estaVacio(){
     return false;
@@ -52,16 +56,12 @@ public class PokemonDAOImp implements PokemonDAO {
 
 	@Override
 	public void escribirPokemon(String ruta, String name, int life, int atack, int defense, int specialAttack, int specialdefense, int speed){
-		try (BufferedWriter fichero = new BufferedWriter(new FileWriter(ruta))){
+		try (BufferedWriter fichero = new BufferedWriter(new FileWriter(ruta,true))){
 
 			File ficheroPkms = new File(ruta);
-			if(!ficheroPkms.exists()){
-				fichero.write(name+";"+atack+";"+defense+";"+specialAttack+";"+specialdefense+";"+speed);
-			} else{
-				fichero.newLine();
-				fichero.write(name+";"+atack+";"+defense+";"+specialAttack+";"+specialdefense+";"+speed);
-			}
-			
+
+			fichero.write(name+";"+life+";"+atack+";"+defense+";"+specialAttack+";"+specialdefense+";"+speed);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
