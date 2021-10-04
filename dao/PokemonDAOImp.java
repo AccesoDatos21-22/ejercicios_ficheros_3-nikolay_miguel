@@ -1,5 +1,9 @@
 package dao;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +52,21 @@ public class PokemonDAOImp implements PokemonDAO {
 
 	@Override
 	public void escribirPokemon(String ruta, String name, int life, int atack, int defense, int specialAttack, int specialdefense, int speed){
+		try (BufferedWriter fichero = new BufferedWriter(new FileWriter(ruta))){
 
-  }
+			File ficheroPkms = new File(ruta);
+			if(!ficheroPkms.exists()){
+				fichero.write(name+";"+atack+";"+defense+";"+specialAttack+";"+specialdefense+";"+speed);
+			} else{
+				fichero.newLine();
+				fichero.write(name+";"+atack+";"+defense+";"+specialAttack+";"+specialdefense+";"+speed);
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 	
 	
 	@Override
