@@ -1,9 +1,7 @@
 package modelo;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class Pokemon {
@@ -16,7 +14,7 @@ public class Pokemon {
 
             int cont = 0;
 
-            
+
         } catch(Exception e){
             System.out.println(e.toString());
         }
