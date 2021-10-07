@@ -1,6 +1,9 @@
 package ficheros;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,24 +19,55 @@ import interfaces.InterfazEjercicios1_3;
  */
 public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
-	
-	
+	static Scanner sc = new Scanner(System.in);
+
 	@Override
 	public List<String> getFrases(Scanner escaner) {
-		
-		return null;
+		ArrayList <String> frases = new ArrayList<String>();
+
+		boolean seguir = true;
+
+		while(seguir){
+			System.out.println("Introduce una frase: ");
+			frases.add(escaner.nextLine());
+
+			System.out.println("¿Quieres introducir más frases? (1-Sí 2-No)");
+			if(!(Integer.parseInt(sc.nextLine()) == 1)){
+				seguir = false;
+			}
+		}
+		return frases;
 	}
 
 	@Override
 	public Path getNombre(Scanner escaner) {
-		
-		return null;
+		System.out.println("Introduce el nombre del fichero (con la extensión .txt):");
+		File fichero = new File(escaner.nextLine());
+
+		Path ruta = null;
+
+		if(String.valueOf(fichero.getPath()).endsWith(".txt")){
+			if(!fichero.exists()){
+				System.out.println("El fichero no existe...");
+			} else{
+				System.out.println("El fichero si que existe!!!");
+				ruta = Path.of(fichero.getAbsolutePath());
+			}
+		}else{
+			System.out.println("El fichero no tiene la extensión correcta...");
+		}
+
+		return ruta;
 	}
 	
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
-		
-		
+		try{
+			Files.write(ruta, cadenas);
+		} catch(Exception e){
+			System.out.println(e.toString());
+		}
+
 	}
 
 	@Override
