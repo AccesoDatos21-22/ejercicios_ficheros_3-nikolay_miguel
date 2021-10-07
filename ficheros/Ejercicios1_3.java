@@ -1,6 +1,8 @@
 package ficheros;
 
+import java.io.*;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,8 +34,14 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 	
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
-		
-		
+		try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(ruta.toFile()))){
+			dos.writeUTF(cadenas.toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
