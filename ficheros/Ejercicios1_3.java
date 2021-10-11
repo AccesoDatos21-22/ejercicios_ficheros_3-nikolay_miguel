@@ -1,5 +1,8 @@
 package ficheros;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
@@ -34,6 +37,13 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 	public void escribefrases(List<String> cadenas, Path ruta) {
 		
 		
+	}
+	public void escribefrases(String cadena,Path ruta){
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(ruta.toFile(),true))){
+			bw.append(cadena);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
