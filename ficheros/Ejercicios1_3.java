@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,19 +67,12 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
-		try {
-			Files.write(ruta, cadenas);
+		try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(ruta.toFile()))){
+			dos.writeUTF(cadenas.toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(String.valueOf(ruta), true))) {
-			for (int i = 0; i < cadenas.size(); i++) {
-				bw.write(cadenas.get(i));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception s) {
-			s.toString();
 		}
 
 	}
