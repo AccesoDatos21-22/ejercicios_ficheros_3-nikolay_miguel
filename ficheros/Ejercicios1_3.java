@@ -1,16 +1,16 @@
 package ficheros;
 
-import java.nio.file.Files;
+import interfaces.InterfazEjercicios1_3;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import interfaces.InterfazEjercicios1_3;
 
 /**
  * 
@@ -26,7 +26,7 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public List<String> getFrases(Scanner escaner) {
-		ArrayList <String> frases = new ArrayList<String>();
+		ArrayList<String> frases = new ArrayList<String>();
 
 		boolean seguir = true;
 
