@@ -47,7 +47,7 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public void escribirFlotante(float numeroDecimal, String ruta) {
-		File fichero = new File(ruta+".dat");
+		File fichero = new File(ruta);
 		try(DataOutputStream os = new DataOutputStream(new FileOutputStream(fichero))){
 			if(fichero.exists()){
 				os.writeFloat(numeroDecimal);
