@@ -13,6 +13,7 @@ public class Pokemon implements Serializable {
     }
 
     public Pokemon(String name, int level, int life, int attack, int defense, int specialAttack, int specialDefense, int speed) {
+        super();
         this.name = name;
         this.level = level;
         this.life = life;
