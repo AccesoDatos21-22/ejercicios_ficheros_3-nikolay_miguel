@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,13 @@ public class PokemonDAOImp implements PokemonDAO {
 
   @Override
 	public List<Pokemon> leerPokemon(String ruta, String nombre){
-    return null;
+    	File f = new File(ruta);
+		try(ObjectInputStream fichero = new ObjectInputStream(new FileInputStream(f))){
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  return null;
   }
 }
