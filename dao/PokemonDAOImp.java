@@ -4,11 +4,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.*;
-import java.nio.file.Path;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Alumno;
 import modelo.Pokemon;
 
 public class PokemonDAOImp implements PokemonDAO {
@@ -31,10 +31,10 @@ public class PokemonDAOImp implements PokemonDAO {
 
 	}
 
-	@Override
-	public boolean estaVacio(){
-    return false;
-  }
+    @Override
+    public boolean estaVacio() {
+        return false;
+    }
 
     @Override
     public boolean estaLLeno() {
@@ -101,7 +101,19 @@ public class PokemonDAOImp implements PokemonDAO {
 
     @Override
     public List<Pokemon> leerPokemon(String ruta) {
-        return null;
+		List<Pokemon> listaP = null;
+		String[] linea;
+		try (BufferedReader br = new BufferedReader(new FileReader(ruta))){
+			linea = br.readLine().split(";");
+			Pokemon p1 = new Pokemon(linea[0],Integer.parseInt(linea[1]),Integer.parseInt(linea[2]),Integer.parseInt(linea[3]),Integer.parseInt(linea[4]),Integer.parseInt(linea[5]),Integer.parseInt(linea[6]),Integer.parseInt(linea[7]));
+			listaP.add(p1);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			return listaP;
+		}
     }
 
     @Override
