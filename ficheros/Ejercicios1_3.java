@@ -1,6 +1,8 @@
 package ficheros;
 
+import java.io.*;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -52,8 +54,18 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public List<Float> leerFlotante(String ruta) {
-		// TODO Auto-generated method stub
-		return null;
+		File f = new File(ruta);
+		ArrayList<Float> listaF = new ArrayList<Float>();
+		try(DataInputStream is = new DataInputStream(new FileInputStream(f))){
+			while(true){
+				listaF.add(is.readFloat());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return listaF;
 	}
 
 	
