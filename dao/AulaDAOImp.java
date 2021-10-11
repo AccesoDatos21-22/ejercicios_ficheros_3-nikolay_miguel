@@ -15,11 +15,11 @@ import java.util.List;
 import modelo.Alumno;
 
 /**
- *  @descrition AulaDAOImp
- *    @author Laura y Carlos
- *  @date 18/9/2021
- *  @version 1.0
- *  @license GPLv3
+ * @author Laura y Carlos
+ * @version 1.0
+ * @descrition AulaDAOImp
+ * @date 18/9/2021
+ * @license GPLv3
  */
 public class AulaDAOImp implements AulaDAO {
     private List<Alumno> alumnos;
@@ -88,10 +88,10 @@ public class AulaDAOImp implements AulaDAO {
      * @param nombre
      */
     public void escribeAlumnos(String nombre) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombre,true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombre, true))) {
             for (Alumno alumno : alumnos) {
                 bw.write(alumno.toString());
-				bw.newLine();
+                bw.newLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,8 +106,8 @@ public class AulaDAOImp implements AulaDAO {
      */
     public void leeAlumnos(String nombre) {
         String linea;
-        try (BufferedReader br = new BufferedReader(new FileReader(nombre))){
-            while ((linea=br.readLine())!=null){
+        try (BufferedReader br = new BufferedReader(new FileReader(nombre))) {
+            while ((linea = br.readLine()) != null) {
                 System.out.println(linea);
             }
         } catch (FileNotFoundException e) {
