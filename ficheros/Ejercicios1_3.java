@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +31,12 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 		boolean seguir = true;
 
-		while(seguir){
+		while (seguir) {
 			System.out.println("Introduce una frase: ");
 			frases.add(escaner.nextLine());
 
 			System.out.println("¿Quieres introducir más frases? (1-Sí 2-No)");
-			if(!(Integer.parseInt(sc.nextLine()) == 1)){
+			if (!(Integer.parseInt(sc.nextLine()) == 1)) {
 				seguir = false;
 			}
 		}
@@ -49,20 +50,20 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 		Path ruta = null;
 
-		if(String.valueOf(fichero.getPath()).endsWith(".txt")){
-			if(!fichero.exists()){
+		if (String.valueOf(fichero.getPath()).endsWith(".txt")) {
+			if (!fichero.exists()) {
 				System.out.println("El fichero no existe...");
-			} else{
+			} else {
 				System.out.println("El fichero si que existe!!!");
 				ruta = Path.of(fichero.getAbsolutePath());
 			}
-		}else{
+		} else {
 			System.out.println("El fichero no tiene la extensión correcta...");
 		}
 
 		return ruta;
 	}
-	
+
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
 		try {
@@ -82,21 +83,34 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	}
 
-		@Override
-		public void leerFrases (Path ruta){
-			// TODO Auto-generated method stub
+	@Override
+	public void leerFrases(Path ruta) {
+		// TODO Auto-generated method stub
 
+	}
+
+
+	@Override
+	public void escribirFlotante(float numeroDecimal, String ruta) {
+		File fichero = new File(ruta);
+		try (DataOutputStream os = new DataOutputStream(new FileOutputStream(fichero))) {
+			if (fichero.exists()) {
+				os.writeFloat(numeroDecimal);
+			} else if (!fichero.exists()) {
+				fichero.createNewFile();
+				os.write((int) numeroDecimal);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
+	}
 
-		@Override
-		public void escribirFlotante ( float numeroDecimal, String ruta){
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public List<Float> leerFlotante (String ruta){
-			// TODO Auto-generated method stub
-			return null;
-		}
+	@Override
+	public List<Float> leerFlotante(String ruta) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
