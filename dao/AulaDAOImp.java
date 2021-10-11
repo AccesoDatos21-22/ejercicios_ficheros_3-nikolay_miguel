@@ -8,6 +8,8 @@
 package dao;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,10 +91,7 @@ public class AulaDAOImp implements AulaDAO {
      */
     public void escribeAlumnos(String nombre) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombre, true))) {
-            for (Alumno alumno : alumnos) {
-                bw.write(alumno.toString());
-                bw.newLine();
-            }
+            Files.write(Path.of(nombre), alumnos.toString().getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,11 +104,8 @@ public class AulaDAOImp implements AulaDAO {
      * @param nombre
      */
     public void leeAlumnos(String nombre) {
-        String linea;
-        try (BufferedReader br = new BufferedReader(new FileReader(nombre))) {
-            while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
-            }
+        try{
+            Files.readAllLines(Path.of(nombre));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
