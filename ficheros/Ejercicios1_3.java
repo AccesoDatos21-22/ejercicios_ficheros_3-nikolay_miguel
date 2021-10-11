@@ -1,5 +1,6 @@
 package ficheros;
 
+import java.io.*;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
@@ -46,8 +47,20 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public void escribirFlotante(float numeroDecimal, String ruta) {
-		// TODO Auto-generated method stub
-		
+		File fichero = new File(ruta+".dat");
+		try(DataOutputStream os = new DataOutputStream(new FileOutputStream(fichero))){
+			if(fichero.exists()){
+				os.writeFloat(numeroDecimal);
+			} else if(!fichero.exists()){
+				fichero.createNewFile();
+				os.write((int) numeroDecimal);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
