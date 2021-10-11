@@ -48,7 +48,7 @@ public interface PokemonDAO {
 	 *	
 	 * @param ruta fichero de texto
 	 */
-	public void escribirPokemon(String ruta, String name, int life, int atack, int defense, int specialAttack, int specialdefense, int speed);
+	public void escribirPokemon(String ruta, String name, int level, int life, int atack, int defense, int specialAttack, int specialdefense, int speed);
 	
 	
 	/**

@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Pokemon implements Serializable {
 
@@ -97,5 +98,18 @@ public class Pokemon implements Serializable {
                 ", attack=" + attack +
                 ", defense=" + defense +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pokemon)) return false;
+        Pokemon pokemon = (Pokemon) o;
+        return getLevel() == pokemon.getLevel() && getLife() == pokemon.getLife() && getAttack() == pokemon.getAttack() && getDefense() == pokemon.getDefense() && getSpecialAttack() == pokemon.getSpecialAttack() && getSpecialDefense() == pokemon.getSpecialDefense() && getSpeed() == pokemon.getSpeed() && Objects.equals(getName(), pokemon.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getLevel(), getLife(), getAttack(), getDefense(), getSpecialAttack(), getSpecialDefense(), getSpeed());
     }
 }

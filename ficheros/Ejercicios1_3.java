@@ -65,21 +65,11 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
         return ruta;
     }
 
-    @Override
     public void escribefrases(List<String> cadenas, Path ruta) {
-        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(ruta.toFile()))) {
-            dos.writeUTF(cadenas.toString());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void escribefrases(String cadena, Path ruta) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(ruta.toFile(), true))) {
-            bw.append(cadena);
+            for(int i = 0; i < cadenas.size(); i++){
+                bw.write(cadenas.get(i));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,7 +94,7 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
     @Override
     public void escribirFlotante(float numeroDecimal, String ruta) {
         File fichero = new File(ruta);
-        try (DataOutputStream os = new DataOutputStream(new FileOutputStream(fichero))) {
+        try (DataOutputStream os = new DataOutputStream(new FileOutputStream(fichero,true))) {
             if (fichero.exists()) {
                 os.writeFloat(numeroDecimal);
             } else if (!fichero.exists()) {
@@ -122,15 +112,17 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 	public List<Float> leerFlotante(String ruta) {
 		File f = new File(ruta);
 		ArrayList<Float> listaF = new ArrayList<Float>();
-		try(DataInputStream is = new DataInputStream(new FileInputStream(f))){
-			while(true){
-				listaF.add(is.readFloat());
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		try(DataInputStream is = new DataInputStream(new FileInputStream(f))) {
+            while (true) {
+                listaF.add(is.readFloat());
+            }
+        } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (EOFException e) {
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 		return listaF;
 	}
 

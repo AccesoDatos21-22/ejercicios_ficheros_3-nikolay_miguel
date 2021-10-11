@@ -62,7 +62,6 @@ public interface InterfazEjercicios1_3 {
 	
 	/**
 	 * Método que lee frases de un archivo y las muestra por pantalla
-	 * @param cadenas
 	 * @param ruta
 	 */
 	public void leerFrases(Path ruta);

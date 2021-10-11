@@ -55,18 +55,25 @@ public class PokemonDAOImp implements PokemonDAO {
 
 
 	@Override
-	public void escribirPokemon(String ruta, String name, int life, int atack, int defense, int specialAttack, int specialdefense, int speed){
+	public void escribirPokemon(String ruta, String name, int level, int life, int atack, int defense, int specialAttack, int specialdefense, int speed){
 		try {
 			File ficheroPkms = new File(ruta);
+            Pokemon temp = new Pokemon();
+
+            int cont = 0;
 
 			if(ficheroPkms.exists()){
-				BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroPkms,true));
-				bw.newLine();
-				bw.write(name+";"+life+";"+atack+";"+defense+";"+specialAttack+";"+specialdefense+";"+speed);
-				bw.close();
-			}else if(ficheroPkms.createNewFile()){
+                try{
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroPkms,true));
+                    bw.newLine();
+                    bw.write(name+";"+level+";"+life+";"+atack+";"+defense+";"+specialAttack+";"+specialdefense+";"+speed);
+                    bw.close();
+                }catch(Exception e) {
+                    System.out.println(e.toString());
+                }
+            }else if(ficheroPkms.createNewFile()){
 				BufferedWriter bw1 = new BufferedWriter(new FileWriter(ficheroPkms));
-				bw1.write(name+";"+life+";"+atack+";"+defense+";"+specialAttack+";"+specialdefense+";"+speed);
+                bw1.write(name+";"+level+";"+life+";"+atack+";"+defense+";"+specialAttack+";"+specialdefense+";"+speed);
 				bw1.close();
 			}
 		} catch (IOException e) {
@@ -78,28 +85,37 @@ public class PokemonDAOImp implements PokemonDAO {
     @Override
     public void imprimirPokemon(String ruta) {
         String[] linea = null;
-        String[] datos = {"Name: ", "Life: ", "Attack: ", "Defense: ", "Special attack: ", "Special defense: ", "Speed: "};
+        String[] datos = {"Name: ", "Level: ","Life: ", "Attack: ", "Defense: ", "Special attack: ", "Special defense: ", "Speed: "};
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
             linea = br.readLine().split(";");
-            for (int i = 0; i < linea.length; i++) {
-                System.out.println(datos[i] + linea[i]);
+            while(linea != null){
+                for (int i = 0; i < linea.length; i++) {
+                    System.out.println(datos[i] + linea[i]);
+                }
+                linea = br.readLine().split(";");
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            System.out.println("Final del fichero");
         }
 
     }
 
     @Override
     public List<Pokemon> leerPokemon(String ruta) {
-		List<Pokemon> listaP = null;
+		List<Pokemon> listaP = new ArrayList<>();
 		String[] linea;
 		try (BufferedReader br = new BufferedReader(new FileReader(ruta))){
-			linea = br.readLine().split(";");
-			Pokemon p1 = new Pokemon(linea[0],Integer.parseInt(linea[1]),Integer.parseInt(linea[2]),Integer.parseInt(linea[3]),Integer.parseInt(linea[4]),Integer.parseInt(linea[5]),Integer.parseInt(linea[6]),Integer.parseInt(linea[7]));
-			listaP.add(p1);
+			String seguir = br.readLine();
+            while(seguir != null){
+                linea = seguir.split(";");
+                Pokemon temp = new Pokemon(linea[0],Integer.parseInt(linea[1]),Integer.parseInt(linea[2]),Integer.parseInt(linea[3]),Integer.parseInt(linea[4]),Integer.parseInt(linea[5]),Integer.parseInt(linea[6]),Integer.parseInt(linea[7]));
+                listaP.add(temp);
+                seguir = br.readLine();
+            }
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -116,14 +132,18 @@ public class PokemonDAOImp implements PokemonDAO {
 
             String linea = br.readLine();
 
+            int contP = 0;
+
             while(linea != null){
                 String[] pokemones = linea.split(";");
                 lista.add(pokemones[0]);
+                linea = br.readLine();
+                contP++;
             }
 
             int cont = 0;
 
-            for(int i = 0; i < pokemones.size(); i++){
+            for(int i = 0; i < contP; i++){
                 if(lista.get(i).equals(pokemon.getName())){
                    cont++;
                 }
@@ -132,7 +152,7 @@ public class PokemonDAOImp implements PokemonDAO {
             if(cont == 0){
                 BufferedWriter bw = new BufferedWriter(new FileWriter(ruta,true));
                 bw.newLine();
-                bw.write(pokemon.toString());
+                bw.write(pokemon.getName()+";"+pokemon.getLevel()+";"+pokemon.getLife()+";"+pokemon.getAttack()+";"+pokemon.getDefense()+";"+pokemon.getSpecialAttack()+";"+pokemon.getSpecialDefense()+";"+pokemon.getSpeed());
                 bw.close();
             }
         } catch (Exception e){
@@ -148,13 +168,17 @@ public class PokemonDAOImp implements PokemonDAO {
 
           String linea = br.readLine();
 
+          int cont = 0;
+
           while(linea != null){
               String[] pokemones = linea.split(";");
               Pokemon temp = new Pokemon(pokemones[0],Integer.parseInt(pokemones[1]),Integer.parseInt(pokemones[2]),Integer.parseInt(pokemones[3]),Integer.parseInt(pokemones[4]),Integer.parseInt(pokemones[5]),Integer.parseInt(pokemones[6]),Integer.parseInt(pokemones[7]));
               lista.add(temp);
+              cont++;
+              linea = br.readLine();
           }
 
-          for(int i = 0; i < pokemones.size(); i++){
+          for(int i = 0; i < cont; i++){
               if(lista.get(i).getName().contains(nombre)){
                   listaFinal.add(lista.get(i));
               }
