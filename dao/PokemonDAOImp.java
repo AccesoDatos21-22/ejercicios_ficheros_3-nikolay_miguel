@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Pokemon;
@@ -112,20 +111,58 @@ public class PokemonDAOImp implements PokemonDAO {
 	
 	@Override
 	public void escribirPokemon(String ruta, Pokemon pokemon){
-		File f = new File(ruta);
-		try(ObjectOutputStream fichero = new ObjectOutputStream(new FileOutputStream(f,true))){
-			if(!f.exists()){
-				System.out.println("El fichero no existe...");
-			} else if(f.exists()){
-				fichero.writeObject(pokemon);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+        try(BufferedReader br = new BufferedReader(new FileReader(ruta))){
+            ArrayList<String> lista = new ArrayList<>();
+
+            String linea = br.readLine();
+
+            while(linea != null){
+                String[] pokemones = linea.split(";");
+                lista.add(pokemones[0]);
+            }
+
+            int cont = 0;
+
+            for(int i = 0; i < pokemones.size(); i++){
+                if(lista.get(i).equals(pokemon.getName())){
+                   cont++;
+                }
+            }
+
+            if(cont == 0){
+                BufferedWriter bw = new BufferedWriter(new FileWriter(ruta,true));
+                bw.newLine();
+                bw.write(pokemon.toString());
+                bw.close();
+            }
+        } catch (Exception e){
+            System.out.println(e.toString());
+        }
+    }
 
   @Override
 	public List<Pokemon> leerPokemon(String ruta, String nombre){
-    return null;
+      List<Pokemon> listaFinal = new ArrayList<>();
+      try(BufferedReader br = new BufferedReader(new FileReader(ruta))){
+          ArrayList<Pokemon> lista = new ArrayList<>();
+
+          String linea = br.readLine();
+
+          while(linea != null){
+              String[] pokemones = linea.split(";");
+              Pokemon temp = new Pokemon(pokemones[0],Integer.parseInt(pokemones[1]),Integer.parseInt(pokemones[2]),Integer.parseInt(pokemones[3]),Integer.parseInt(pokemones[4]),Integer.parseInt(pokemones[5]),Integer.parseInt(pokemones[6]),Integer.parseInt(pokemones[7]));
+              lista.add(temp);
+          }
+
+          for(int i = 0; i < pokemones.size(); i++){
+              if(lista.get(i).getName().contains(nombre)){
+                  listaFinal.add(lista.get(i));
+              }
+          }
+
+      } catch (Exception e){
+          System.out.println(e.toString());
+      }
+    return listaFinal;
   }
 }
