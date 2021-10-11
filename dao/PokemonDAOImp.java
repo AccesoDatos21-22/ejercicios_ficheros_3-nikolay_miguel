@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Pokemon;
@@ -75,8 +76,6 @@ public class PokemonDAOImp implements PokemonDAO {
 
 	}
 
-
-
     @Override
     public void imprimirPokemon(String ruta) {
         String[] linea = null;
@@ -91,11 +90,6 @@ public class PokemonDAOImp implements PokemonDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
-
-    @Override
-    public void escribirPokemon(String ruta, Pokemon pokemon) {
 
     }
 
@@ -115,9 +109,23 @@ public class PokemonDAOImp implements PokemonDAO {
 			return listaP;
 		}
     }
+	
+	@Override
+	public void escribirPokemon(String ruta, Pokemon pokemon){
+		File f = new File(ruta);
+		try(ObjectOutputStream fichero = new ObjectOutputStream(new FileOutputStream(f,true))){
+			if(!f.exists()){
+				System.out.println("El fichero no existe...");
+			} else if(f.exists()){
+				fichero.writeObject(pokemon);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    @Override
-    public List<Pokemon> leerPokemon(String ruta, String nombre) {
-        return null;
-    }
+  @Override
+	public List<Pokemon> leerPokemon(String ruta, String nombre){
+    return null;
+  }
 }
