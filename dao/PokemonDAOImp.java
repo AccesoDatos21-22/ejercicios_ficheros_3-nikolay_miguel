@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,19 +14,19 @@ import modelo.Pokemon;
 
 public class PokemonDAOImp implements PokemonDAO {
 
-	private List<Pokemon> pokemones;
-	private int numPokemones; // atributo para controlar el numero real de
-	// elementos que tiene nuestro almacen
+    private List<Pokemon> pokemones;
+    private int numPokemones; // atributo para controlar el numero real de
+    // elementos que tiene nuestro almacen
 
-	/**
-	 * Constructor del Almacen con un determinado tamano
-	 * 
-	 * @param tamano
-	 */
-	public PokemonDAOImp(int tamano) {
-		pokemones = new ArrayList<Pokemon>(tamano);
-		numPokemones = tamano;
-	}
+    /**
+     * Constructor del Almacen con un determinado tamano
+     *
+     * @param tamano
+     */
+    public PokemonDAOImp(int tamano) {
+        pokemones = new ArrayList<Pokemon>(tamano);
+        numPokemones = tamano;
+    }
 
 	public PokemonDAOImp() {
 
@@ -35,22 +37,22 @@ public class PokemonDAOImp implements PokemonDAO {
     return false;
   }
 
-	@Override
-	public boolean estaLLeno(){
-    return false;
-  }
+    @Override
+    public boolean estaLLeno() {
+        return false;
+    }
 
 
-	@Override
-	public void add(Pokemon pokemon) {
+    @Override
+    public void add(Pokemon pokemon) {
 
-  }
+    }
 
 
-  @Override
-	public boolean eliminar(Pokemon pokemon){
-    return false;
-  }
+    @Override
+    public boolean eliminar(Pokemon pokemon) {
+        return false;
+    }
 
 
 	@Override
@@ -73,25 +75,38 @@ public class PokemonDAOImp implements PokemonDAO {
 		}
 
 	}
-	
-	
-	@Override
-	public void imprimirPokemon (String ruta){
 
-  }
-	
-	@Override
-	public void escribirPokemon(String ruta, Pokemon pokemon){
 
-  }
-	
-	@Override
-	public List<Pokemon> leerPokemon(String ruta){
-    return null;
-  }
 
-  @Override
-	public List<Pokemon> leerPokemon(String ruta, String nombre){
-    return null;
-  }
+    @Override
+    public void imprimirPokemon(String ruta) {
+        String[] linea = null;
+        String[] datos = {"Name: ", "Life: ", "Attack: ", "Defense: ", "Special attack: ", "Special defense: ", "Speed: "};
+        try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
+            linea = br.readLine().split(";");
+            for (int i = 0; i < linea.length; i++) {
+                System.out.println(datos[i] + linea[i]);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void escribirPokemon(String ruta, Pokemon pokemon) {
+
+    }
+
+    @Override
+    public List<Pokemon> leerPokemon(String ruta) {
+        return null;
+    }
+
+    @Override
+    public List<Pokemon> leerPokemon(String ruta, String nombre) {
+        return null;
+    }
 }
