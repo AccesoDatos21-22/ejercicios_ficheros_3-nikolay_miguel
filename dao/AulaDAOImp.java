@@ -45,7 +45,8 @@ public class AulaDAOImp implements AulaDAO {
      * @return true si está vacio
      */
     public boolean estaVacio() {
-        return false;
+        if (alumnos.isEmpty()) return true;
+        else return false;
     }
 
     /**
@@ -54,7 +55,8 @@ public class AulaDAOImp implements AulaDAO {
      * @return
      */
     public boolean estaLLeno() {
-        return false;
+        if (alumnos.get((numalumnos - 1)) != null) return true;
+        else return false;
     }
 
     /**
@@ -73,7 +75,8 @@ public class AulaDAOImp implements AulaDAO {
      * @return true si elimina el elemento, false en caso contrario
      */
     public boolean eliminar(Alumno alumno) {
-        return false;
+        alumnos.remove(alumno);
+        return true;
 
     }
 
@@ -81,7 +84,9 @@ public class AulaDAOImp implements AulaDAO {
      * Imprime por pantalla los elementos del almacén
      */
     public void informacionAlumnos() {
-
+        for (Alumno a : alumnos) {
+            System.out.println(a.toString());
+        }
     }
 
     /**
@@ -104,8 +109,8 @@ public class AulaDAOImp implements AulaDAO {
      * @param nombre
      */
     public void leeAlumnos(String nombre) {
-        try{
-            Files.readAllLines(Path.of(nombre));
+        try {
+            System.out.println(Files.readAllLines(Path.of(nombre)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

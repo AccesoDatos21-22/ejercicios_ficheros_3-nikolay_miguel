@@ -1,0 +1,1 @@
+[El alumno se llama:nom1 ape1	Nació en el año:1	Vive en la calle:calle1 1, El alumno se llama:nom2 ape2	Nació en el año:2	Vive en la calle:calle2 2, El alumno se llama:nom3 ape3	Nació en el año:3	Vive en la calle:calle3 3]
