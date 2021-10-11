@@ -65,12 +65,10 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 	
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
-<<<<<<< HEAD
 		try{
 			Files.write(ruta, cadenas);
 		} catch(Exception e){
 			System.out.println(e.toString());
-=======
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(String.valueOf(ruta),true))){
 			for(int i = 0; i < cadenas.size(); i++){
 				bw.write(cadenas.get(i));
@@ -79,7 +77,6 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 			e.printStackTrace();
 		} catch (Exception e){
 			e.toString();
->>>>>>> Ejercicio_5
 		}
 
 	}
