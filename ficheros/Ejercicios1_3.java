@@ -76,6 +76,13 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		}
 
 	}
+	public void escribefrases(String cadena,Path ruta){
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(ruta.toFile(),true))){
+			bw.append(cadena);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void leerFrases(Path ruta) {
