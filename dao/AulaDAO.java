@@ -62,13 +62,13 @@ public interface  AulaDAO {
 	 * 
 	 * @param ruta
 	 */
-	public void escribeAlumnos(Path ruta) ;
+	public void escribeAlumnos(String nombre) ;
 
 	/**
 	 * Método que lee alumnos de un archivo y los muestra por pantalla
 	 * 
 	 * @param ruta
 	 */
-	public void leeAlumnos(Path ruta);
+	public void leeAlumnos(String nombre);
 
 }
