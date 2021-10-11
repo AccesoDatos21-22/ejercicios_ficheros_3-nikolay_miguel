@@ -4,6 +4,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="16" project-jdk-type="JavaSDK">
         <output url="file://$PROJECT_DIR$/out" />
     </component>
@@ -27,4 +28,9 @@
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 >>>>>>> origin/Ejercicio_8
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+>>>>>>> origin/Ejercicio_10
 </project>

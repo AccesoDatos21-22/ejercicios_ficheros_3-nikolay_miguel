@@ -113,7 +113,21 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    @Override
+    public void imprimirFlotante(String ruta) {
+        try (DataInputStream dis = new DataInputStream(new FileInputStream(ruta))) {
+            while (true) {
+                System.out.println(dis.readFloat());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (EOFException e) {
+            System.out.println("Fin de fichero");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

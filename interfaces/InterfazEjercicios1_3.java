@@ -27,8 +27,10 @@ public interface InterfazEjercicios1_3 {
 	 */
 	public void escribirFlotante(float numeroDecimal, String ruta);
 
-	   
-	  /**
+
+    void imprimirFlotante(String ruta);
+
+    /**
 	   * devuelva una lista de números flotante del fichero creado con 
 	   * escribirFlotante
 	   * @param ruta ruta del fichero
