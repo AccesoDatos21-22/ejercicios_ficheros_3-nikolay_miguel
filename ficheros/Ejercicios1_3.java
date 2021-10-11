@@ -65,46 +65,38 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 	
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
-		try{
+		try {
 			Files.write(ruta, cadenas);
-		} catch(Exception e){
-			System.out.println(e.toString());
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter(String.valueOf(ruta),true))){
-			for(int i = 0; i < cadenas.size(); i++){
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(String.valueOf(ruta), true))) {
+			for (int i = 0; i < cadenas.size(); i++) {
 				bw.write(cadenas.get(i));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (Exception e){
-			e.toString();
+		} catch (Exception s) {
+			s.toString();
 		}
 
 	}
 
-	@Override
-	public void leerFrases(Path ruta) {
-		// TODO Auto-generated method stub
-		
-	}
+		@Override
+		public void leerFrases (Path ruta){
+			// TODO Auto-generated method stub
+
+		}
 
 
+		@Override
+		public void escribirFlotante ( float numeroDecimal, String ruta){
+			// TODO Auto-generated method stub
 
-	@Override
-	public void escribirFlotante(float numeroDecimal, String ruta) {
-		// TODO Auto-generated method stub
-		
-	}
+		}
 
-	@Override
-	public List<Float> leerFlotante(String ruta) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-	
-		
-		
-
-
-}
+		@Override
+		public List<Float> leerFlotante (String ruta){
+			// TODO Auto-generated method stub
+			return null;
+		}
