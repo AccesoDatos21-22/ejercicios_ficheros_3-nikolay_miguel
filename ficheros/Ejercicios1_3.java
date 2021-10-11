@@ -1,5 +1,6 @@
 package ficheros;
 
+import java.io.*;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
@@ -38,8 +39,17 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public void leerFrases(Path ruta) {
-		// TODO Auto-generated method stub
-		
+		try (BufferedReader br = new BufferedReader(new FileReader(ruta.toString()))){
+			String linea;
+			while((linea=br.readLine())!=null){
+				System.out.println(linea);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 
