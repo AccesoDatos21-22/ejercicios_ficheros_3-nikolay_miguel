@@ -59,7 +59,7 @@ public class PokemonDAOImp implements PokemonDAO {
 			File ficheroPkms = new File(ruta);
 
 			if(ficheroPkms.exists()){
-				BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroPkms));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroPkms,true));
 				bw.newLine();
 				bw.write(name+";"+life+";"+atack+";"+defense+";"+specialAttack+";"+specialdefense+";"+speed);
 				bw.close();
@@ -68,8 +68,6 @@ public class PokemonDAOImp implements PokemonDAO {
 				bw1.write(name+";"+life+";"+atack+";"+defense+";"+specialAttack+";"+specialdefense+";"+speed);
 				bw1.close();
 			}
-
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
